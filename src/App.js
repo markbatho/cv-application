@@ -3,6 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
+import EditView from './components/edit/EditView';
+import PreviewView from './components/preview/PreviewView';
 
 const views = {
   EDIT: 'edit',
@@ -31,7 +33,7 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-      <h1>Hello, World!</h1>
+      {view === views.EDIT ? <EditView /> : <PreviewView />}
     </div>
   );
 }
