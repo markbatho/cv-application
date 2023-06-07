@@ -1,11 +1,10 @@
 import { Container } from 'react-bootstrap';
+import GeneralInformation from './GeneralInformation';
 
 export default function EditView() {
   return (
-    <div>
-      <Container>
-        <h1>Edit view</h1>
-      </Container>
-    </div>
+    <Container className="d-flex flex-column gap-4 my-4">
+      <GeneralInformation />
+    </Container>
   );
 }
