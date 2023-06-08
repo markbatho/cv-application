@@ -26,6 +26,7 @@ export default function GeneralInformation({ generalInfo, setGeneralInfo }) {
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   onChange={(e) => handleOnChange(e)}
+                  value={generalInfo.firstName}
                   type="text"
                   placeholder="John"
                 />
@@ -34,6 +35,7 @@ export default function GeneralInformation({ generalInfo, setGeneralInfo }) {
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   onChange={(e) => handleOnChange(e)}
+                  value={generalInfo.lastName}
                   type="text"
                   placeholder="Doe"
                 />
@@ -44,6 +46,7 @@ export default function GeneralInformation({ generalInfo, setGeneralInfo }) {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   onChange={(e) => handleOnChange(e)}
+                  value={generalInfo.email}
                   type="email"
                   placeholder="johndoe@example.com"
                 />
@@ -52,6 +55,7 @@ export default function GeneralInformation({ generalInfo, setGeneralInfo }) {
                 <Form.Label>Phone</Form.Label>
                 <Form.Control
                   onChange={(e) => handleOnChange(e)}
+                  value={generalInfo.phone}
                   type="tel"
                   placeholder="+36-30-123-4567"
                 />
@@ -61,6 +65,7 @@ export default function GeneralInformation({ generalInfo, setGeneralInfo }) {
               <Form.Label>Address</Form.Label>
               <Form.Control
                 onChange={(e) => handleOnChange(e)}
+                value={generalInfo.address}
                 type="text"
                 placeholder="200 Some Street Scranton PA 12345 USA"
               />
@@ -69,6 +74,7 @@ export default function GeneralInformation({ generalInfo, setGeneralInfo }) {
               <Form.Label>About</Form.Label>
               <Form.Control
                 onChange={(e) => handleOnChange(e)}
+                value={generalInfo.about}
                 as="textarea"
                 rows={4}
                 placeholder="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."

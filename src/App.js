@@ -15,12 +15,12 @@ const views = {
 function App() {
   const [view, setView] = useState(views.EDIT);
   const [generalInfo, setGeneralInfo] = useState({
-    firstName: null,
-    lastName: null,
-    email: null,
-    phone: null,
-    address: null,
-    about: null,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    about: '',
   });
 
   return (
