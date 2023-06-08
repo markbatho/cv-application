@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import EditView from './components/edit/EditView';
 import PreviewView from './components/preview/PreviewView';
+import GeneralInformation from './components/edit/GeneralInformation';
 
 const views = {
   EDIT: 'edit',
@@ -13,6 +14,14 @@ const views = {
 
 function App() {
   const [view, setView] = useState(views.EDIT);
+  const [generalInfo, setGeneralInfo] = useState({
+    firstName: null,
+    lastName: null,
+    email: null,
+    phone: null,
+    address: null,
+    about: null,
+  });
 
   return (
     <div className="App">
@@ -33,7 +42,16 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-      {view === views.EDIT ? <EditView /> : <PreviewView />}
+      {view === views.EDIT ? (
+        <EditView>
+          <GeneralInformation
+            generalInfo={generalInfo}
+            setGeneralInfo={setGeneralInfo}
+          />
+        </EditView>
+      ) : (
+        <PreviewView />
+      )}
     </div>
   );
 }
