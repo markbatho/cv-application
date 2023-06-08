@@ -4,8 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 export default function GeneralInformation({ generalInfo, setGeneralInfo }) {
-  console.log(generalInfo);
-
   function handleOnChange(e) {
     setGeneralInfo({
       ...generalInfo,

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import EditView from './components/edit/EditView';
 import PreviewView from './components/preview/PreviewView';
 import GeneralInformation from './components/edit/GeneralInformation';
+import Education from './components/edit/Education';
 
 const views = {
   EDIT: 'edit',
@@ -22,6 +23,7 @@ function App() {
     address: '',
     about: '',
   });
+  const [education, setEducation] = useState([]);
 
   return (
     <div className="App">
@@ -48,6 +50,7 @@ function App() {
             generalInfo={generalInfo}
             setGeneralInfo={setGeneralInfo}
           />
+          <Education education={education} setEducation={setEducation} />
         </EditView>
       ) : (
         <PreviewView />
