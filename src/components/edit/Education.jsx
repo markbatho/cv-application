@@ -3,18 +3,10 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import { Row } from 'react-bootstrap';
-import { useEffect, useState, useRef } from 'react';
 
 let eduID = 0;
 
 export default function Education({ education, setEducation }) {
-  let eduRef = useRef(null);
-  const [trigger, setTrigger] = useState(false);
-
-  useEffect(() => {
-    if (eduRef.current) eduRef.current.scrollIntoView();
-  }, [trigger]);
-
   function handleClick() {
     setEducation([
       ...education,
@@ -26,7 +18,6 @@ export default function Education({ education, setEducation }) {
         endDate: '',
       },
     ]);
-    setTrigger(!trigger);
   }
 
   function handleOnChange(e, itemId) {
@@ -41,18 +32,28 @@ export default function Education({ education, setEducation }) {
     setEducation(educationArr);
   }
 
+  function handleDelete(e, itemId) {
+    const educationArr = education.slice();
+    const index = educationArr.findIndex((elem) => {
+      if (elem.id === itemId) return true;
+      return false;
+    });
+
+    if (index > -1) educationArr.splice(index, 1);
+
+    setEducation(educationArr);
+  }
+
   return (
     <section className="d-flex flex-column gap-3">
       <div className="section-header d-flex justify-content-between">
         <h2>Education</h2>
-        <Button onClick={handleClick} variant="primary">
-          Add Education
-        </Button>
       </div>
       {education &&
         education.map((item) => {
           return (
-            <Card ref={eduRef} key={item.id}>
+            <Card key={item.id}>
+              <Card.Header>School</Card.Header>
               <Card.Body>
                 <Form>
                   <Form.Group className="mb-3" as={Col} controlId="schoolName">
@@ -97,9 +98,20 @@ export default function Education({ education, setEducation }) {
                   </Row>
                 </Form>
               </Card.Body>
+              <Card.Footer className="text-end">
+                <Button
+                  onClick={(e) => handleDelete(e, item.id)}
+                  variant="outline-danger"
+                >
+                  Delete
+                </Button>
+              </Card.Footer>
             </Card>
           );
         })}
+      <Button onClick={handleClick} variant="primary">
+        Add Education
+      </Button>
     </section>
   );
 }

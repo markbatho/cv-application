@@ -3,18 +3,10 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import { Row } from 'react-bootstrap';
-import { useEffect, useState, useRef } from 'react';
 
 let workID = 0;
 
 export default function Work({ work, setWork }) {
-  let workRef = useRef(null);
-  const [trigger, setTrigger] = useState(false);
-
-  useEffect(() => {
-    if (workRef.current) workRef.current.scrollIntoView();
-  }, [trigger]);
-
   function handleClick() {
     setWork([
       ...work,
@@ -26,7 +18,6 @@ export default function Work({ work, setWork }) {
         endDate: '',
       },
     ]);
-    setTrigger(!trigger);
   }
 
   function handleOnChange(e, itemId) {
@@ -41,18 +32,28 @@ export default function Work({ work, setWork }) {
     setWork(workArr);
   }
 
+  function handleDelete(e, itemId) {
+    const workArr = work.slice();
+    const index = workArr.findIndex((elem) => {
+      if (elem.id === itemId) return true;
+      return false;
+    });
+
+    if (index > -1) workArr.splice(index, 1);
+
+    setWork(workArr);
+  }
+
   return (
     <section className="d-flex flex-column gap-3">
       <div className="section-header d-flex justify-content-between">
         <h2>Work Experience</h2>
-        <Button onClick={handleClick} variant="primary">
-          Add Work Experience
-        </Button>
       </div>
       {work &&
         work.map((item) => {
           return (
-            <Card ref={workRef} key={item.id}>
+            <Card key={item.id}>
+              <Card.Header>Company</Card.Header>
               <Card.Body>
                 <Form>
                   <Form.Group className="mb-3" as={Col} controlId="companyName">
@@ -107,9 +108,20 @@ export default function Work({ work, setWork }) {
                   </Row>
                 </Form>
               </Card.Body>
+              <Card.Footer className="text-end">
+                <Button
+                  onClick={(e) => handleDelete(e, item.id)}
+                  variant="outline-danger"
+                >
+                  Delete
+                </Button>
+              </Card.Footer>
             </Card>
           );
         })}
+      <Button onClick={handleClick} variant="primary">
+        Add Work Experience
+      </Button>
     </section>
   );
 }
