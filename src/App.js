@@ -7,6 +7,7 @@ import EditView from './components/edit/EditView';
 import PreviewView from './components/preview/PreviewView';
 import GeneralInformation from './components/edit/GeneralInformation';
 import Education from './components/edit/Education';
+import Work from './components/edit/Work';
 
 const views = {
   EDIT: 'edit',
@@ -24,6 +25,7 @@ function App() {
     about: '',
   });
   const [education, setEducation] = useState([]);
+  const [work, setWork] = useState([]);
 
   return (
     <div className="App">
@@ -51,6 +53,7 @@ function App() {
             setGeneralInfo={setGeneralInfo}
           />
           <Education education={education} setEducation={setEducation} />
+          <Work work={work} setWork={setWork} />
         </EditView>
       ) : (
         <PreviewView />
