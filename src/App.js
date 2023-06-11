@@ -35,7 +35,6 @@ function App() {
 
     if (education.length > 0) {
       isEducationValid = education.every((elem) => {
-        console.log(elem);
         if (elem.isValid) return true;
         return false;
       });
@@ -43,7 +42,6 @@ function App() {
 
     if (work.length > 0) {
       isWorkValid = work.every((elem) => {
-        console.log(elem);
         if (elem.isValid) return true;
         return false;
       });
