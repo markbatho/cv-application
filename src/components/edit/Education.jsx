@@ -136,7 +136,7 @@ export default function Education({ education, setEducation }) {
                   </Row>
                 </Form>
               </Card.Body>
-              <Card.Footer className="text-end gap-2">
+              <Card.Footer className="text-end">
                 <Button
                   form={'eduform-' + item.id}
                   type="submit"
