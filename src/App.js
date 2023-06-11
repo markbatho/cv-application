@@ -26,15 +26,22 @@ function App() {
   });
   const [education, setEducation] = useState([]);
   const [work, setWork] = useState([]);
+  const [isPreviewEnabled, setIsPreviewEnabled] = useState(false);
 
   return (
     <div className="App">
-      <Navbar className="px-2 py-0" bg="white" variant="light" fixed="top">
+      <Navbar
+        className="px-2 py-0 shadow-sm"
+        bg="white"
+        variant="light"
+        fixed="top"
+      >
         <Container fluid>
           <Navbar.Brand href="#">CV Application</Navbar.Brand>
           <Nav className="justify-content-end">
             <Button
-              variant="primary"
+              disabled={isPreviewEnabled ? false : true}
+              variant={isPreviewEnabled ? 'primary' : 'secondary'}
               onClick={() => {
                 view === views.EDIT
                   ? setView(views.PREVIEW)

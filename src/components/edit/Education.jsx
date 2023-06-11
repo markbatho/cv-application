@@ -16,6 +16,7 @@ export default function Education({ education, setEducation }) {
         titleOfStudy: '',
         startDate: '',
         endDate: '',
+        isValid: false,
       },
     ]);
   }
@@ -24,6 +25,32 @@ export default function Education({ education, setEducation }) {
     const educationArr = education.map((item) => {
       if (item.id === itemId) {
         return { ...item, [e.target.id]: e.target.value };
+      }
+
+      return item;
+    });
+
+    setEducation(educationArr);
+  }
+
+  function handleSubmit(e, itemId) {
+    e.preventDefault();
+
+    const educationArr = education.map((item) => {
+      if (item.id === itemId) {
+        return { ...item, isValid: true };
+      }
+
+      return item;
+    });
+
+    setEducation(educationArr);
+  }
+
+  function handleEdit(e, itemId) {
+    const educationArr = education.map((item) => {
+      if (item.id === itemId) {
+        return { ...item, isValid: false };
       }
 
       return item;
@@ -55,7 +82,10 @@ export default function Education({ education, setEducation }) {
             <Card key={item.id}>
               <Card.Header>School</Card.Header>
               <Card.Body>
-                <Form>
+                <Form
+                  id={'eduform-' + item.id}
+                  onSubmit={(e) => handleSubmit(e, item.id)}
+                >
                   <Form.Group className="mb-3" as={Col} controlId="schoolName">
                     <Form.Label>School Name</Form.Label>
                     <Form.Control
@@ -63,6 +93,8 @@ export default function Education({ education, setEducation }) {
                       value={item.schoolName}
                       type="text"
                       placeholder="University of Chicago"
+                      required
+                      disabled={item.isValid ? true : false}
                     />
                   </Form.Group>
                   <Form.Group
@@ -76,6 +108,8 @@ export default function Education({ education, setEducation }) {
                       value={item.titleOfStudy}
                       type="text"
                       placeholder="BSc Computer Science"
+                      required
+                      disabled={item.isValid ? true : false}
                     />
                   </Form.Group>
                   <Row className="mb-3">
@@ -85,6 +119,8 @@ export default function Education({ education, setEducation }) {
                         onChange={(e) => handleOnChange(e, item.id)}
                         value={item.startDate}
                         type="date"
+                        required
+                        disabled={item.isValid ? true : false}
                       />
                     </Form.Group>
                     <Form.Group as={Col} controlId="endDate">
@@ -93,12 +129,28 @@ export default function Education({ education, setEducation }) {
                         onChange={(e) => handleOnChange(e, item.id)}
                         value={item.endDate}
                         type="date"
+                        required
+                        disabled={item.isValid ? true : false}
                       />
                     </Form.Group>
                   </Row>
                 </Form>
               </Card.Body>
-              <Card.Footer className="text-end">
+              <Card.Footer className="text-end gap-2">
+                <Button
+                  form={'eduform-' + item.id}
+                  type="submit"
+                  variant="outline-success"
+                >
+                  Save
+                </Button>
+                <Button
+                  className="mx-2"
+                  onClick={(e) => handleEdit(e, item.id)}
+                  variant="outline-warning"
+                >
+                  Edit
+                </Button>
                 <Button
                   onClick={(e) => handleDelete(e, item.id)}
                   variant="outline-danger"

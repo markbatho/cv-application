@@ -11,3 +11,11 @@ code {
 nav {
   height: 4.5rem;
 }
+
+.card {
+  transition: box-shadow 250ms;
+}
+
+.card:hover {
+  box-shadow: var(--bs-box-shadow);
+}
