@@ -2,7 +2,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EditView from './components/edit/EditView';
 import PreviewView from './components/preview/PreviewView';
 import GeneralInformation from './components/edit/GeneralInformation';
@@ -27,6 +27,34 @@ function App() {
   const [education, setEducation] = useState([]);
   const [work, setWork] = useState([]);
   const [isPreviewEnabled, setIsPreviewEnabled] = useState(false);
+
+  useEffect(() => {
+    let isGeneralInfoValid = generalInfo.isValid;
+    let isEducationValid = false;
+    let isWorkValid = false;
+
+    if (education.length > 0) {
+      isEducationValid = education.every((elem) => {
+        console.log(elem);
+        if (elem.isValid) return true;
+        return false;
+      });
+    }
+
+    if (work.length > 0) {
+      isWorkValid = work.every((elem) => {
+        console.log(elem);
+        if (elem.isValid) return true;
+        return false;
+      });
+    }
+
+    if (isGeneralInfoValid && isEducationValid && isWorkValid) {
+      setIsPreviewEnabled(true);
+    } else {
+      setIsPreviewEnabled(false);
+    }
+  }, [generalInfo, education, work]);
 
   return (
     <div className="App">
