@@ -89,7 +89,11 @@ function App() {
           <Work work={work} setWork={setWork} />
         </EditView>
       ) : (
-        <PreviewView />
+        <PreviewView
+          generalInfo={generalInfo}
+          education={education}
+          work={work}
+        />
       )}
     </div>
   );
